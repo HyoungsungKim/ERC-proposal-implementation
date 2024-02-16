@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: CC0-1.0 
 pragma solidity ^0.8.0;
 
 //import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -14,8 +14,6 @@ contract PerpetualContractNFT is ERC4907, IPerpetualContractNFT {
         uint256 loanStartTime; // Timestamp when the loan starts
     }
 
-    uint256 private _bufferTime;
-    
     mapping(uint256 => LoanInfo) internal _loans;
 
     //Constructor to initialize the Perpetual Contract NFT contract with the given name and symbo
@@ -28,6 +26,8 @@ contract PerpetualContractNFT is ERC4907, IPerpetualContractNFT {
 
         LoanInfo storage info = _loans[tokenId];
         info.borrower = msg.sender;
+        // The loan amount should reflect the asset's value as represented by the NFT, considering an appropriate loan-to-value (LTV) ratio.
+        info.loanAmount = loanAmount;
         info.loanAmount = loanAmount;
         info.interestRate = interestRate;
         info.loanDuration = loanDuration;

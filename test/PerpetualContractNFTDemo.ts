@@ -6,7 +6,6 @@ describe("PerpetualContractNFTDemo", function () {
     const [owner] = await ethers.getSigners();
 
     const PerpetualContractNFTDemo = await ethers.getContractFactory("PerpetualContractNFTDemo");
-    // Set 5 minute (300,000) additional buffer
     const demo = await PerpetualContractNFTDemo.deploy("DemoNFT", "DNFT");
     await demo.waitForDeployment();
     expect(demo.target).to.be.properAddress;
